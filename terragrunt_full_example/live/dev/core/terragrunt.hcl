@@ -1,0 +1,1 @@
+../../prod/core/terragrunt.hcl

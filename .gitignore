@@ -1,3 +1,14 @@
+# private API creds file
+env.key
+
+#auto-built files
+common.tf
+provider.tf
+backend.tf
+
+# MacOS files
+.DS_Store
+
 # Local .terraform directories
 **/.terraform/*
 
