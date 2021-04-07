@@ -11,9 +11,11 @@ If you've never used terragrunt before, I highly recommend it instead of a "bare
 - [An example static website with Cloudfront](modules/cloudfront_static_website): A simple, but complete static
 website hosted via cloudfront and s3. This also automatically syncs a local folder with the remote s3 bucket so
 all you have to do is `terragrunt apply`
+- [VPS with full internet access](modules/public_ec2): A simple EC2 instance with all the networking configured
+so you can SSH into it and it can access the internet.
 
 ## Why?
 
 The point of this is to provide "copy&paste" templates to start a new project on. Obviously, these don't cover everything but they cover some of the more tedious bits of starting new projects (like creating a new VPC that is publicly routable - a lot of steps, but not complicated and easy to change to fit your needs)
 
-MIT licensed, so do whatever you want with it.
+MIT licensed, so do whatever you want with it and be nice.
