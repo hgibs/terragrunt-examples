@@ -1,9 +1,47 @@
-data "aws_vpc" "main" {
-  id = var.main_vpc_id
-}
-
 data "aws_availability_zones" "AZs" {
   state = "available"
+}
+
+resource "aws_vpc" "main" {
+  cidr_block                       = "10.0.0.0/16"
+  enable_dns_support               = true
+  enable_dns_hostnames             = true
+  assign_generated_ipv6_cidr_block = true
+
+  tags = {
+    Name = "main"
+  }
+}
+
+resource "aws_internet_gateway" "main_gw" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "main_gw"
+  }
+}
+
+resource "aws_route_table" "r" {
+  vpc_id = aws_vpc.main.id
+
+  # route {
+  #   cidr_block = "10.0.1.0/24"
+  #   gateway_id = aws_internet_gateway.main.id
+  # }
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.main_gw.id
+  }
+
+  route {
+    ipv6_cidr_block = "::/0"
+    gateway_id      = aws_internet_gateway.main_gw.id
+  }
+
+  tags = {
+    Name = "main"
+  }
 }
 
 resource "aws_security_group" "lambda_layers" {

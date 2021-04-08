@@ -41,7 +41,10 @@ resource "aws_instance" "webserver" {
 #! /bin/bash
 set -x
 #download public keys from github
-curl "https://github.com/USERNAME.keys" | tee -a /home/ec2-user/.ssh/authorized_keys
+curl "https://github.com/${var.github_username}.keys" | tee -a /home/ec2-user/.ssh/authorized_keys
 USER_DATA
 
+  depends_on = [
+    aws_internet_gateway.main_gw
+  ]
 }
