@@ -44,6 +44,11 @@ resource "aws_route_table" "r" {
   }
 }
 
+resource "aws_main_route_table_association" "a" {
+  vpc_id         = aws_vpc.main.id
+  route_table_id = aws_route_table.r.id
+}
+
 resource "aws_security_group" "lambda_layers" {
   name        = "lambda_layers_ssh"
   description = "Allow SSH inbound traffic for the layer builder"
